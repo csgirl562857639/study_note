@@ -38,3 +38,5 @@
     cd utils &&
     echo | ./install_server.sh
   </code></pre>
+
+* 如果想安装其他版本的redis或者升级redis版本，更改上面脚本中的redis版本号后直接执行即可
