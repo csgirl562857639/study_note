@@ -9,7 +9,7 @@
   yum install -y pcre pcre-devel
 ```
 
-* yum暗转Openssl
+* yum安装Openssl
 ```
   yum install -y openssl openssl-devel
 ```

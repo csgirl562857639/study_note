@@ -46,10 +46,6 @@
         并发环境下很容易引起事务的数据脏读(dirty read)、不可重复读(nonrepeatable read)、幻读(phantom read)
       ```
 
-      ```
-        ISOLATION_DEFAULT:
-      ```
-
       | 隔离级别        | 含义                             |
       | ------------- |:--------------------------------:|
       | ISOLATION_DEFAULT      | 使用后端数据库默认的隔离级别|
