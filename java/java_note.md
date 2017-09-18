@@ -89,3 +89,11 @@ enum EnumTest {
 ## Map
     1、HashMap是无序的，LinkedHashMap和TreeMap是有序的
     2、
+
+## 并发处理
+    1、服务器水平扩展
+    2、数据库读写分离
+    3、动静分离
+    4、缓存
+    5、数据库updat是防止超库存
+    6、接口幂等性处理
