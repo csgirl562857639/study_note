@@ -11,3 +11,16 @@
 ```
 
 * 安装过程中可能会出现错误，一般都是缺少依赖软件导致的。根据打印的错误信息安装所需软件即可
+
+* install git bash
+```shell
+#!/bin/sh
+
+wget https://github.com/git/git/archive/v2.15.1.tar.gz &&
+  tar zxvf v2.15.1.tar.gz &&
+  cd git-2.15.1 &&
+  make configure &&
+  ./configure --prefix=/usr &&
+  make &&
+  make install
+```
