@@ -18,3 +18,13 @@
 
   yum install ncurses-devel -y
 ```
+
+* install_vim.sh
+```shell
+  wget https://github.com/vim/vim/archive/v8.0.1376.tar.gz &&
+    tar zxvf v8.0.1376.tar.gz &&
+    cd vim-8.0.1376 &&
+    ./configure --prefix=/usr &&
+    make &&
+    make install &&
+```
