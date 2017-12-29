@@ -58,4 +58,6 @@ app:
    - SPRING_PROFILES_ACTIVE=prod
 ```
 
-# [参考链接](https://segmentfault.com/a/1190000011367595)
+# 参考
+* [链接1](https://segmentfault.com/a/1190000011367595)
+* [链接2](https://yq.aliyun.com/articles/25408)
