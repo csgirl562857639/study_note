@@ -1,0 +1,125 @@
+version: '3.4'
+services:
+  eureka-server-01:
+    image: edjr/java
+    ports:
+      - 8010:8080
+    container_name: eureka-server-01
+    volumes:
+      - /data/app/microsoft/eureka-server/target/eureka-server.jar:/app.jar
+    networks:
+      - edjr
+  my-rabbit:
+    image: rabbitmq:3-management
+    container_name: my-rabbit
+    networks:
+      - edjr
+    environment:
+      - RABBITMQ_DEFAULT_USER=heihaier
+      - RABBITMQ_DEFAULT_PASS=Aina101706
+  config-server-01:
+    image: edjr/java
+    ports:
+      - 8011:8080
+    container_name: config-server-01
+    volumes:
+      - /data/app/microsoft/config-server/target/config-server.jar:/app.jar
+    networks:
+      - edjr
+    depends_on:
+      - eureka-server-01
+      - my-rabbit
+  config-server-02:
+    image: edjr/java
+    ports:
+      - 8012:8080
+    container_name: config-server-02
+    volumes:
+      - /data/app/microsoft/config-server/target/config-server.jar:/app.jar
+    networks:
+      - edjr
+    depends_on:
+      - eureka-server-01
+      - my-rabbit
+  yzd-api-01:
+    image: edjr/java
+    ports:
+      - 8013:8080
+    container_name: yzd-api-01
+    volumes:
+      - /data/app/microsoft/yzd/yzd-api/target/yzd-api.jar:/app.jar
+    networks:
+      - edjr
+    depends_on:
+      - eureka-server-01
+      - config-server-01
+    environment:
+       - SPRING_PROFILES_ACTIVE=prod
+  yzd-api-02:
+    image: edjr/java
+    ports:
+      - 8014:8080
+    container_name: yzd-api-02
+    volumes:
+      - /data/app/microsoft/yzd/yzd-api/target/yzd-api.jar:/app.jar
+    networks:
+      - edjr
+    depends_on:
+      - eureka-server-01
+      - config-server-01
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+  zuul-server-01:
+    image: edjr/java
+    ports:
+      - 8015:8080
+    container_name: zuul-server-01
+    volumes:
+      - /data/app/microsoft/zuul-server/target/zuul-server.jar:/app.jar
+    networks:
+      - edjr
+    depends_on:
+      - eureka-server-01
+  sms-01:
+    image: edjr/java
+    ports:
+      - 8016:8080
+    container_name: sms-01
+    volumes:
+      - /data/app/microsoft/sms/target/sms.jar:/app.jar
+    networks:
+      - edjr
+    depends_on:
+      - eureka-server-01
+      - config-server-01
+  sms-02:
+    image: edjr/java
+    ports:
+      - 8017:8080
+    container_name: sms-02
+    volumes:
+      - /data/app/microsoft/sms/target/sms.jar:/app.jar
+    networks:
+      - edjr
+    depends_on:
+      - eureka-server-01
+      - config-server-01
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    container_name: my-redis
+    networks:
+      - edjr
+  web:
+    image: nginx
+    ports:
+      - 80:80
+    container_name: my-nginx
+    volumes:
+      - /etc/nginx/nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - edjr
+networks:
+  edjr:
+    driver: bridge

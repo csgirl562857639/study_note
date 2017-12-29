@@ -1,0 +1,44 @@
+version: '3.4'
+services:
+  web:
+    image: nginx
+    container_name: web
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /data/docker/static/www:/www
+      - /data/docker/static:/data/static
+      - /data/docker/log/nginx:/wwwlogs
+      - /data/docker/nginx/conf/nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - edjr
+  ysp-api:
+    image: tomcat
+    container_name: ysp-api
+    ports: 
+      - 8087:8080
+    volumes:
+      - /data/docker/log/edjr/api:/usr/local/tomcat/logs
+      - /data/docker/app/edjr/api/ysp-api.war:/usr/local/tomcat/webapps/ROOT.war
+      - /data/docker/static:/data/static
+    environment:
+      - JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom
+    networks:
+      - edjr
+  ysp-mgr:
+    image: tomcat
+    container_name: ysp-mgr
+    ports: 
+      - 8086:8080
+    volumes:
+      - /data/docker/log/edjr/mgr:/usr/local/tomcat/logs
+      - /data/docker/app/edjr/mgr/ysp-mgr.war:/usr/local/tomcat/webapps/ROOT.war
+      - /data/docker/static:/data/static
+    environment:
+      - JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom
+    networks:
+      - edjr
+networks:
+  edjr:
+    driver: bridge
