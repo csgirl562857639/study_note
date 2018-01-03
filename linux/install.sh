@@ -14,8 +14,7 @@ main() {
     cd autojump-release-v22.5.1 &&
     ./install.py &&
     echo '[[ -s /root/.autojump/etc/profile.d/autojump.sh ]] && source /root/.autojump/etc/profile.d/autojump.sh' >> ~/.zshrc &&
-    source ~/.zshrc
-
+    source ~/.zshrc &&
     echo 'finish!!!'
 }
 
