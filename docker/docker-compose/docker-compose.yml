@@ -120,6 +120,18 @@ services:
       - /etc/nginx/nginx.conf:/etc/nginx/nginx.conf
     networks:
       - edjr
+  sonar:
+    image: sonarqube
+    container_name: sonarqube
+    pords:
+      - 9000:9000
+      - 9092:9092
+    environment:
+      - SONARQUBE_JDBC_USERNAME=edian_sonar
+      - SONARQUBE_JDBC_PASSWORD=edian_test 
+      - SONARQUBE_JDBC_URL=jdbc:mysql://edianlicai4test.mysql.rds.aliyuncs.com:3306/edian_sonar?serverTimezone=Asia/Singapore&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+    networks:
+      - edjr
 networks:
   edjr:
     driver: bridge
